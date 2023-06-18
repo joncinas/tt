@@ -1,0 +1,54 @@
+// 设置抽奖结果的随机数生成器  
+const rnd = Math.floor(Math.random() * 100);
+
+// 定义抽奖页面的 HTML 模板  
+const template = `<html>  
+  <head>  
+    <title>随机抽奖</title>  
+  </head>  
+  <body>  
+    <h1>欢迎来到随机抽奖!</h1>  
+    <p>你将有机会赢得以下奖品:</p>  
+    <ul>  
+      <li>iPhone 13 Pro Max</li>  
+      <li>1000 美元</li>  
+      <li>五星级酒店住宿一晚</li>  
+      <li>10000 元人民币</li>  
+      <li>免费机票一张</li>  
+      <li>5000 元人民币</li>  
+    </ul>  
+    <p>点击“开始抽奖”按钮进行抽奖!</p>  
+    <button onclick="抽奖 ()">开始抽奖</button>  
+    <p>抽奖结果如下:</p>  
+    <ul id="results"></ul>  
+  </body>  
+</html>`;
+
+// 抽奖函数  
+function 抽奖 () {  
+  // 将 HTML 模板转换为 JSON 对象  
+  const data = JSON.parse(template);
+
+  // 替换奖品和抽奖结果的变量  
+  data.iphone = rnd.toString();  
+  data.usd = rnd.toString();  
+  data.五星酒店 = rnd.toString();  
+  data.airplane = rnd.toString();  
+  data.rmb = rnd.toString();
+
+  // 将 JSON 对象转换为 HTML 模板  
+  const html = JSON.stringify(data);
+
+  // 替换 HTML 模板中的变量  
+  html = html.replace("iPhone 13 Pro Max", data.iphone);  
+  html = html.replace("1000 美元", data.usd);  
+  html = html.replace("五星级酒店住宿一晚", data.五星酒店);  
+  html = html.replace("10000 元人民币", data.rmb);  
+  html = html.replace("免费机票一张", data.airplane);  
+  html = html.replace("5000 元人民币", data.rmb);
+
+  // 创建一个新的 HTML 元素并将其添加到页面中  
+  const result = document.createElement("ul");  
+  result.innerHTML = html;  
+  document.getElementById("results").appendChild(result);  
+}
